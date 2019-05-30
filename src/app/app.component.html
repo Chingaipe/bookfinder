@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="logo">
+    <img src="https://via.placeholder.com/120" class="rounded mx-auto d-block" alt="application logo">
+    <div class="clearfix">...</div>
+    <h3>BookFinder</h3>
+    <p>
+      Search by Book title, Author or genre
+    </p>
+  </div>
+
+  <form class="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input type="search" class="form-control" formControlName="query" placeholder="Search for a book" required>
+    </div>
+    <div class="searchBtn">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+</div>
