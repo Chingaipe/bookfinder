@@ -11,9 +11,42 @@
   <form class="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <input type="search" class="form-control" formControlName="query" placeholder="Search for a book" required>
+      <small class="error" *ngIf="hint">This field is required</small>
     </div>
     <div class="searchBtn">
       <button type="submit" class="btn btn-primary">Search</button>
     </div>
   </form>
+
+  <div class="clearfix"></div>
+
+  <div class="row" *ngIf="books">
+    <div class="col-sm col-md-6" *ngFor="let book of books">
+      <div class="card d-flex flex-row mb-4 bg-light text-dark">
+        <div class="col-4 pt-4">
+          <img class="card-img-thumbnail" [srcset]="book.volumeInfo.imageLinks['thumbnail']" alt="book thumbnail">
+        </div>
+        <div class="card-body col-8">
+          <h5 class="card-title">{{ book.volumeInfo['title'] }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ book.volumeInfo['subtitle'] }}</h6>
+          <p class="card-text">
+            <ul>
+              <li>
+                <span style="font-weight:600">Author(s): </span> 
+                <span *ngFor="let author of book.volumeInfo['authors']">{{ author }}, </span>
+              </li>
+              <li>
+                <span style="font-weight:600">Publisher: </span>{{ book.volumeInfo.publisher }}
+              </li>
+              <li>
+                <span style="font-weight:600">Publish Date: </span>{{ book.volumeInfo.publishedDate }}
+              </li>
+            </ul>
+          
+
+          <a [href]="book.volumeInfo.previewLink" class="card-link">Preview book</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

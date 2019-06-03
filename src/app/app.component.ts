@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SearchService } from './_service/search.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'my-app',
@@ -9,20 +9,26 @@ import { SearchService } from './_service/search.service';
 })
 export class AppComponent  {
   
+  url = 'https://www.googleapis.com/books/v1/volumes?q=';
   books: any;
+  hint = false;
 
   searchForm = this.fb.group({
-    query: ['', Validators.required]
+    query: [null, Validators.required]
   });
 
   constructor(
     private fb: FormBuilder,
-    private searchService: SearchService) { }
+    private http: HttpClient) { }
 
   onSubmit() {
-    let query = this.searchForm.value;
+    if(this.searchForm.invalid){
+      return this.hint = true;
+    }
 
-    this.searchService.getBooks(query).subscribe(
+    let q = this.searchForm.value;
+
+    this.getBooks(q.query).subscribe(
       data => {
         this.books = data['items'];
       },
@@ -30,7 +36,9 @@ export class AppComponent  {
         console.log(err);
       }
     );
+  }
 
-    console.log(this.searchForm.value);
+  getBooks(query: string) {
+    return this.http.get(this.url + query);
   }
 }
