@@ -12,6 +12,10 @@ p {
   align-content: center;
 }
 
+input {
+  text-align: center
+}
+
 .searchBtn {
   display: flex;
   justify-content: center;

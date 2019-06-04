@@ -1,16 +1,16 @@
 <div class="container">
   <div class="logo">
-    <img src="https://via.placeholder.com/120" class="rounded mx-auto d-block" alt="application logo">
+    <!-- <img src="https://via.placeholder.com/120" class="rounded mx-auto d-block" alt="application logo"> -->
     <div class="clearfix">...</div>
     <h3>BookFinder</h3>
     <p>
-      Search by Book title, Author or genre
+      Find any book, search by Book title, Author or Genre
     </p>
   </div>
 
   <form class="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input type="search" class="form-control" formControlName="query" placeholder="Search for a book" required>
+      <input type="search" class="form-control" formControlName="query" placeholder="Type Author or Title..." required>
       <small class="error" *ngIf="hint">This field is required</small>
     </div>
     <div class="searchBtn">
@@ -22,9 +22,9 @@
 
   <div class="row" *ngIf="books">
     <div class="col-sm col-md-6" *ngFor="let book of books">
-      <div class="card d-flex flex-row mb-4 bg-light text-dark">
+      <div class="card d-flex flex-row mb-4 bg-light text-dark" height="200px">
         <div class="col-4 pt-4">
-          <img class="card-img-thumbnail" [srcset]="book.volumeInfo.imageLinks['thumbnail']" alt="book thumbnail">
+          <img class="img-thumbnail" [srcset]="book.volumeInfo.imageLinks['thumbnail']" alt="book thumbnail">
         </div>
         <div class="card-body col-8">
           <h5 class="card-title">{{ book.volumeInfo['title'] }}</h5>
