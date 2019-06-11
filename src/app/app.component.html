@@ -23,8 +23,11 @@
   <div class="row" *ngIf="books">
     <div class="col-sm col-md-6" *ngFor="let book of books">
       <div class="card d-flex flex-row mb-4 bg-light text-dark" height="200px">
-        <div class="col-4 pt-4">
+        <div class="col-4 pt-4" *ngIf="book.volumeInfo.imageLinks['thumbnail']">
           <img class="img-thumbnail" [srcset]="book.volumeInfo.imageLinks['thumbnail']" alt="book thumbnail">
+        </div>
+        <div class="col-4 pt-4" *ngIf="!book.volumeInfo.imageLinks['thumbnail']">
+          <img class="img-thumbnail" src="./assets/no-cover.jpg" alt="No cover thumbnail">
         </div>
         <div class="card-body col-8">
           <h5 class="card-title">{{ book.volumeInfo['title'] }}</h5>
