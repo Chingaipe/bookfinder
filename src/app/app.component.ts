@@ -13,6 +13,8 @@ export class AppComponent  {
   books: any;
   hint = false;
 
+  defaultImage = './assets/no-cover.jpg';
+
   searchForm = this.fb.group({
     query: [null, Validators.required]
   });
